@@ -1,0 +1,181 @@
+{
+  "firstName": "Chandan",
+  "lastName": "Veerabhadrappa",
+  "intro": [
+    "I'm a software developer with a passion for application development and business transformation. I am currently based in Dublin, Ireland. My main focus is helping clients build and transform their business with modern tools and technology."
+  ],
+  "about": [
+    "Java • Spring Boot/Cloud • Angular • DevOps • IBM Certified BPM & ODM Developer • Microservices • Netflix OSS",
+    "10+ years of industry exposure across multiple domains, including banking & insurance",
+    "IBM Certified Business Process Manager Application Developer and Operational Decision Manager Rules Developer",
+    "Extensive hands-on experience in developing RESTful APIs using Java technologies like SpringBoot/SpringCloud and Netflix OSS",
+    "Experience on application development using domain/event-driven and microservices architectures",
+    "Hands-on experience with Kafka Stream Processing and messaging, WSO2 ESB, JMS/ActiveMQ, BDD/TDD using frameworks like Cucumber and mocks (Mockito/PowerMock)",
+    "Deep understanding of agile methodologies, DevOps, CI/CD practices, Docker, Sonar/NexusIQ/Aquasec and Jenkins"
+  ],
+  "experience": [
+    {
+      "title": "Application Architect and Developer",
+      "employer": {
+        "name": "Credit Suisse",
+        "location": "Dublin, Ireland"
+      },
+      "employmentType": "Full-time",
+      "locationType": "Hybrid",
+      "currentlyWorking": true,
+      "startDate": {
+        "month": "May",
+        "year": 2021
+      },
+      "industry": "Banking",
+      "description": [
+        "Contributed towards integrating multiple tools and systems like Jira, Confluence, Jenkins Pipelines, Bitbucket, Sonar and NexusIQ into the in-house developer platform solution called Odyssey, that was used by thousands of developers across the organisation.",
+        "As a Fullstack Java developer, mainly worked on creating custom APIs for the Odyssey platform, developed dashboards and UI components using Angular.",
+        "Contributed as a backend and UI developer while improving Heimdall - a custom solution used for automating the Change Requests."
+      ],
+      "skills": [
+        "Angular",
+        "Integration",
+        "OpenShift",
+        "Spring Boot",
+        "Java",
+        "REST APIs",
+        "Docker",
+        "Jenkins",
+        "API Development",
+        "Continuous Integration and Continuous Delivery (CI/CD)",
+        "DevOps"
+      ]
+    },
+    {
+      "title": "Java Software Developer",
+      "employer": {
+        "name": "AIB",
+        "location": "Dublin, Ireland"
+      },
+      "employmentType": "Contract",
+      "locationType": "Hybrid",
+      "currentlyWorking": false,
+      "startDate": {
+        "month": "Apr",
+        "year": 2019
+      },
+      "endDate": {
+        "month": "Apr",
+        "year": 2021
+      },
+      "industry": "Banking",
+      "description": [
+        "As a Java Developer, I contributed towards implementing the OpenAPI RESTful endpoints for the bank's third parties.",
+        "My role as a Java developer included developing, testing and delivering scalable, cloud-ready microservices and RESTful APIs for AIB. For the development and delivery of microservices, we used Spring Boot and Spring Cloud along with other technologies from the Netflix OSS like Eureka, Ribbon, Hystrix and Zuul. We followed TDD/BDD with Cucumber and Mockito frameworks and deliveries follow CI/CD with Docker and Jenkins."
+      ],
+      "skills": [
+        "Apigee API Management",
+        "Swagger API",
+        "Spring Boot",
+        "Spring Framework",
+        "Java",
+        "Spring Cloud",
+        "Netflix OSS",
+        "Zuul API Gateway",
+        "Behavior-Driven Development (BDD)",
+        "Eureka"
+      ]
+    },
+    {
+      "title": "IBM ODM Rules Developer / Java Developer",
+      "employer": {
+        "name": "Fidelity Investments",
+        "location": "Dublin, Ireland"
+      },
+      "employmentType": "Contract",
+      "locationType": "On-site",
+      "currentlyWorking": false,
+      "startDate": {
+        "month": "Mar",
+        "year": 2016
+      },
+      "endDate": {
+        "month": "Apr",
+        "year": 2019
+      },
+      "industry": "Finance/Insurance",
+      "description": [
+        "Contributed as IBM ODM Rules and Java Developer. As a Java Developer, I contributed towards implementing distributed system using event-driven microservices."
+      ],
+      "skills": [
+        "ActiveMQ",
+        "Distributed Systems",
+        "IBM Operational Decision Manager (ODM)",
+        "Spring Framework",
+        "Java",
+        "Business Rules",
+        "Rules Engines"
+      ]
+    },
+    {
+      "title": "IBM BPM Developer",
+      "employer": {
+        "name": "Fidelity Investments",
+        "location": "Bengaluru, India"
+      },
+      "employmentType": "Contract",
+      "locationType": "On-site",
+      "currentlyWorking": false,
+      "startDate": {
+        "month": "Jun",
+        "year": 2014
+      },
+      "endDate": {
+        "month": "Feb",
+        "year": 2016
+      },
+      "industry": "Finance/Insurance",
+      "description": [
+        "As a BPM Application Developer, I contributed towards the design and development of the Cash Management System."
+      ],
+      "skills": [
+        "BPMN",
+        "AJAX",
+        "Agile Methodologies",
+        "Java",
+        "JavaScript",
+        "IBM BPM",
+        "SOA",
+        "REST APIs"
+      ]
+    },
+    {
+      "title": "Associate Consultant",
+      "employer": {
+        "name": "Boeing",
+        "location": "Bengaluru, India"
+      },
+      "employmentType": "Contract",
+      "locationType": "On-site",
+      "currentlyWorking": false,
+      "startDate": {
+        "month": "Sep",
+        "year": 2011
+      },
+      "endDate": {
+        "month": "Jun",
+        "year": 2014
+      },
+      "industry": "Aviation",
+      "description": ["IBM BPM Application and Process Developer"],
+      "skills": [
+        "BPMN",
+        "AJAX",
+        "Agile Methodologies",
+        "Java",
+        "DOJO",
+        "Database",
+        "JavaScript",
+        "IBM BPM",
+        "SOA",
+        "REST APIs"
+      ]
+    }
+  ]
+}
