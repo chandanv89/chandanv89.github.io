@@ -61,6 +61,12 @@ minima:
     - title: GitHub
       icon: github
       url: "https://github.com/chandanv89"
+    - title: LinkedIn
+      icon: linkedin
+      url: "https://www.linkedin.com/in/chandanv89/"
+    - title: 500px
+      icon: "500px"
+      url: "https://500px.com/p/chandanv89"
 
 markdown: kramdown
 

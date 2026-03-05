@@ -42,26 +42,17 @@ h6,
   line-height: 1.75;
 }
 
-* {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+// Prevent drag on images only
+img {
   -webkit-user-drag: none;
 }
 
-// Allow text selection in code blocks
-pre,
-code,
-.highlight {
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
-}
-
-img {
-  pointer-events: none;
+// Post description on home page
+.post-description {
+  font-size: 0.95em;
+  color: var(--minima-text-color, #3c3c3c);
+  line-height: 1.5;
+  margin-top: 0.3em;
 }
 
 // Work experience entry layout
@@ -96,7 +87,7 @@ img {
 
 .work-details .work-meta {
   font-size: 0.85em;
-  color: #888;
+  color: var(--minima-brand-color-dimmed, #6d6d6d);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   line-height: 1.4;
@@ -104,7 +95,7 @@ img {
 
 .work-details .work-location {
   font-size: 0.9em;
-  color: #666;
+  color: var(--minima-brand-color, #818181);
   line-height: 1.4;
 }
 

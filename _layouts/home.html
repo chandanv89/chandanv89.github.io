@@ -31,7 +31,9 @@ layout: base
             {{ post.title | escape }}
           </a>
         </h3>
-        {%- if site.minima.show_excerpts -%}
+        {%- if post.description -%}
+          <p class="post-description">{{ post.description }}</p>
+        {%- elsif site.minima.show_excerpts -%}
           {{ post.excerpt }}
         {%- endif -%}
       </li>

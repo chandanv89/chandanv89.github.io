@@ -164,10 +164,6 @@ pre,
 code {
   font-family: $code-font-family;
   background-color: $code-background-color;
-
-  @include media-query($on-palm) {
-    font-family: monospace;
-  }
 }
 
 pre {
