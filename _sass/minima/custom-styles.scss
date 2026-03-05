@@ -1,5 +1,23 @@
 // Placeholder to allow defining custom styles that override everything else.\n// (Use `_sass/minima/custom-variables.scss` to override variable defaults)
 
+// Site logo in header
+.site-logo {
+  height: 32px;
+  width: 32px;
+  vertical-align: middle;
+  border-radius: 6px;
+  margin-top: -2px;
+}
+
+.site-title {
+  line-height: inherit;
+}
+
+.site-title-text {
+  margin-left: 0.4em;
+  vertical-align: middle;
+}
+
 // Font assignments
 h1,
 h2,
@@ -30,6 +48,16 @@ h6,
   -ms-user-select: none;
   user-select: none;
   -webkit-user-drag: none;
+}
+
+// Allow text selection in code blocks
+pre,
+code,
+.highlight {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
 img {
@@ -235,4 +263,67 @@ img {
       opacity: 1;
     }
   }
+}
+
+// Code block line numbers
+div.highlighter-rouge {
+  position: relative;
+
+  pre.highlight {
+    padding-left: 3.5em;
+  }
+}
+
+.line-numbers-rows {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3em;
+  padding: 8px 0;
+  border-right: 1px solid var(--minima-border-color-01, #e8e8e8);
+  text-align: right;
+  user-select: none;
+  pointer-events: none;
+  font-family: $code-font-family;
+  font-size: 15px;
+  line-height: 1.4;
+
+  span {
+    display: block;
+    padding-right: 0.6em;
+    color: var(--minima-brand-color-light, #999);
+  }
+}
+
+// Code copy button
+.code-copy-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: var(--minima-background-color, #fdfdfd);
+  border: 1px solid var(--minima-border-color-01, #e8e8e8);
+  border-radius: 4px;
+  padding: 4px 7px;
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    background 0.2s ease;
+  color: var(--minima-text-color, #111);
+  font-size: 0.85em;
+  line-height: 1;
+  z-index: 1;
+
+  &:hover {
+    background: var(--minima-border-color-01, #e8e8e8);
+  }
+
+  &.copied {
+    color: #28a745;
+    border-color: #28a745;
+  }
+}
+
+div.highlighter-rouge:hover .code-copy-btn {
+  opacity: 1;
 }

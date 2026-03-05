@@ -193,3 +193,57 @@ layout: base
     window.addEventListener("resize", updateProgress, { passive: true });
   })();
 </script>
+
+<script>
+  // Code block line numbers and copy button
+  (function () {
+    document
+      .querySelectorAll("div.highlighter-rouge")
+      .forEach(function (block) {
+        var pre = block.querySelector("pre.highlight");
+        var code = block.querySelector("code");
+        if (!pre || !code) return;
+
+        // Make code block a positioning context
+        block.style.position = "relative";
+
+        // Store original code for copying (before we modify DOM)
+        var rawCode = code.textContent;
+
+        // Add line numbers
+        var lines = rawCode.split("\n");
+        // Remove trailing empty line (Rouge adds one)
+        if (lines.length > 0 && lines[lines.length - 1].trim() === "") {
+          lines.pop();
+        }
+        var lineCount = lines.length;
+
+        var lineNumbersEl = document.createElement("span");
+        lineNumbersEl.className = "line-numbers-rows";
+        lineNumbersEl.setAttribute("aria-hidden", "true");
+        for (var i = 1; i <= lineCount; i++) {
+          var span = document.createElement("span");
+          span.textContent = i;
+          lineNumbersEl.appendChild(span);
+        }
+        pre.insertBefore(lineNumbersEl, pre.firstChild);
+
+        // Add copy button
+        var btn = document.createElement("button");
+        btn.className = "code-copy-btn";
+        btn.setAttribute("aria-label", "Copy code");
+        btn.innerHTML = '<i class="fa-regular fa-copy"></i>';
+        btn.addEventListener("click", function () {
+          navigator.clipboard.writeText(rawCode).then(function () {
+            btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+            btn.classList.add("copied");
+            setTimeout(function () {
+              btn.innerHTML = '<i class="fa-regular fa-copy"></i>';
+              btn.classList.remove("copied");
+            }, 1500);
+          });
+        });
+        block.appendChild(btn);
+      });
+  })();
+</script>

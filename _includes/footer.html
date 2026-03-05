@@ -32,8 +32,19 @@
     <div class="social-links">{%- include social.html -%}</div>
 
     <p class="footer-credit">
+      &copy;
+      <a href="/">{{ site.author.name | default: "Chandan Veerabhadrappa" }}</a
+      ><br />
       Website made with
-      <a href="https://jekyllrb.com/" class="external-link">Jekyll</a>
+      <a href="https://jekyllrb.com/" class="external-link">Jekyll</a> | Theme
+      based on
+      <a href="https://github.com/jekyll/minima" class="external-link"
+        >Minima</a
+      >
+      | Licensed under the
+      <a href="https://opensource.org/licenses/MIT" class="external-link"
+        >MIT License</a
+      >.
     </p>
   </div>
 </footer>

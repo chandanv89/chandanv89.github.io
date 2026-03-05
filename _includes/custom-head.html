@@ -4,6 +4,17 @@ https://realfavicongenerator.net/ to add your own favicons. 2. Customize default
 _includes/custom-head.html in your source directory and insert the given code
 snippet. {% endcomment %}
 
+<link
+  rel="icon"
+  type="image/x-icon"
+  href="{{ '/favicon.ico' | relative_url }}"
+/>
+<link
+  rel="icon"
+  type="image/svg+xml"
+  href="{{ '/favicon.svg' | relative_url }}"
+/>
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
