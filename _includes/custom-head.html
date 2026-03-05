@@ -1,6 +1,40 @@
-{% comment %}
-  Placeholder to allow defining custom head, in principle, you can add anything here, e.g. favicons:
+{% comment %} Placeholder to allow defining custom head, in principle, you can
+add anything here, e.g. favicons: 1. Head over to
+https://realfavicongenerator.net/ to add your own favicons. 2. Customize default
+_includes/custom-head.html in your source directory and insert the given code
+snippet. {% endcomment %}
 
-  1. Head over to https://realfavicongenerator.net/ to add your own favicons.
-  2. Customize default _includes/custom-head.html in your source directory and insert the given code snippet.
-{% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+  rel="stylesheet"
+/>
+
+{% if page.math %}
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"],
+      ],
+      displayMath: [
+        ["$$", "$$"],
+        ["\\[", "\\]"],
+      ],
+      processEscapes: true,
+      processEnvironments: true,
+    },
+    options: {
+      skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      ignoreHtmlClass: "language-.*",
+    },
+  };
+</script>
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+></script>
+{% endif %}

@@ -1,5 +1,28 @@
-// Placeholder to allow defining custom styles that override everything else.
-// (Use `_sass/minima/custom-variables.scss` to override variable defaults)
+// Placeholder to allow defining custom styles that override everything else.\n// (Use `_sass/minima/custom-variables.scss` to override variable defaults)
+
+// Font assignments
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.site-title,
+.post-title,
+.page-title,
+.site-nav,
+.nav-item,
+.toc-summary,
+.toc-list,
+.site-footer,
+.footer-credit {
+  font-family: "Inter", sans-serif;
+}
+
+.post-content {
+  font-size: 1.15em;
+  line-height: 1.75;
+}
 
 * {
   -webkit-user-select: none;
@@ -55,4 +78,161 @@ img {
   font-size: 0.9em;
   color: #666;
   line-height: 1.4;
+}
+
+.footer-credit {
+  text-align: center;
+  font-size: 0.75em;
+  color: var(--minima-brand-color-light, #828282);
+  margin-top: 1.5em;
+  margin-bottom: 0;
+
+  a {
+    color: var(--minima-brand-color, #2a7ae2);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Reading progress bar
+.reading-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 9999;
+  background: transparent;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &.visible {
+    opacity: 1;
+  }
+}
+
+.reading-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--minima-brand-color, #2a7ae2);
+  border-radius: 0 2px 2px 0;
+  will-change: width, background;
+  transition:
+    width 0.25s cubic-bezier(0.25, 0.1, 0.25, 1),
+    background 0.4s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .reading-progress-bar {
+    background: var(--minima-brand-color, #79b8ff);
+  }
+}
+
+// Table of Contents
+.post-toc {
+  margin-bottom: 2em;
+
+  .toc-details {
+    border: 1px solid var(--minima-border-color-01, #e8e8e8);
+    border-radius: 6px;
+    padding: 0.75em 1em;
+    background: var(--minima-background-color, #fdfdfd);
+  }
+
+  .toc-summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.1em;
+    color: var(--minima-text-color, #111);
+    user-select: none;
+    list-style: revert;
+
+    &::-webkit-details-marker {
+      color: var(--minima-brand-color-light, #828282);
+    }
+
+    &::marker {
+      color: var(--minima-brand-color-light, #828282);
+    }
+  }
+
+  .toc-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0.6em 0 0 0;
+
+    li {
+      margin: 0.3em 0;
+      line-height: 1.4;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--minima-brand-color, #2a7ae2);
+      font-size: 0.92em;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .toc-level-3 {
+      padding-left: 1.2em;
+    }
+
+    .toc-level-4 {
+      padding-left: 2.4em;
+    }
+  }
+}
+
+.post-comments {
+  margin-top: 3em;
+
+  .post-comments-title {
+    font-size: 1.4em;
+    margin-bottom: 1em;
+  }
+}
+
+// Heading anchor links
+.post-content {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    position: relative;
+
+    .heading-anchor {
+      position: absolute;
+      right: 100%;
+      margin-right: 0.3em;
+      font-size: 0.6em;
+      vertical-align: middle;
+      opacity: 0;
+      text-decoration: none;
+      color: var(--minima-brand-color-light, #828282);
+      transition:
+        opacity 0.2s ease,
+        color 0.2s ease;
+
+      &:hover {
+        color: var(--minima-brand-color, #2a7ae2);
+      }
+
+      &.copied {
+        color: #28a745;
+        opacity: 1;
+      }
+    }
+
+    &:hover .heading-anchor {
+      opacity: 1;
+    }
+  }
 }

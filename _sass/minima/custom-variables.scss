@@ -1,1 +1,17 @@
 // Placeholder to allow overriding predefined variables smoothly.
+
+@font-face {
+  font-family: "Monaspace Xenon";
+  src:
+    url("../fonts/Variable%20Web%20Fonts/Monaspace%20Xenon/Monaspace%20Xenon%20Var.woff2")
+      format("woff2"),
+    url("../fonts/Variable%20Web%20Fonts/Monaspace%20Xenon/Monaspace%20Xenon%20Var.woff")
+      format("woff");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+$base-font-family: "Lora", Georgia, serif;
+$code-font-family:
+  "Monaspace Xenon", "Menlo", "Inconsolata", "Consolas", monospace;

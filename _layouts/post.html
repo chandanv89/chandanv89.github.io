@@ -1,50 +1,195 @@
 ---
 layout: base
 ---
-<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
+<div class="reading-progress-container">
+  <div class="reading-progress-bar" id="reading-progress"></div>
+</div>
+
+<article
+  class="post h-entry"
+  itemscope
+  itemtype="http://schema.org/BlogPosting"
+>
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    <h1 class="post-title p-name" itemprop="name headline">
+      {{ page.title | escape }}
+    </h1>
     <div class="post-meta">
-      {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-      {% assign pdate = page.date | date_to_xmlschema %}
-      {%- if page.modified_date %}<span class="meta-label">Published:</span>{% endif %}
-      <time class="dt-published" datetime="{{ pdate }}" itemprop="datePublished">
+      {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y"
+      -%} {% assign pdate = page.date | date_to_xmlschema %} {%- if
+      page.modified_date %}<span class="meta-label">Published:</span>{% endif %}
+      <time
+        class="dt-published"
+        datetime="{{ pdate }}"
+        itemprop="datePublished"
+      >
         {{ pdate | date: date_format }}
       </time>
       {%- if page.modified_date -%}
-        <span class="bullet-divider">•</span>
-        <span class="meta-label">Updated:</span>
-        {%- assign mdate = page.modified_date | date_to_xmlschema %}
-        <time class="dt-modified" datetime="{{ mdate }}" itemprop="dateModified">
-          {{ mdate | date: date_format }}
-        </time>
-      {%- endif -%}
-      {%- if page.author %}
-      <div class="{% unless page.modified_date %}force-inline {% endunless %}post-authors">
+      <span class="bullet-divider">•</span>
+      <span class="meta-label">Updated:</span>
+      {%- assign mdate = page.modified_date | date_to_xmlschema %}
+      <time class="dt-modified" datetime="{{ mdate }}" itemprop="dateModified">
+        {{ mdate | date: date_format }}
+      </time>
+      {%- endif -%} {%- if page.author %}
+      <div
+        class="{% unless page.modified_date %}force-inline {% endunless %}post-authors"
+      >
         {%- for author in page.author %}
-          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-            <span class="p-author h-card" itemprop="name">{{ author }}</span></span>
-          {%- if forloop.last == false %}, {% endif -%}
-        {% endfor %}
+        <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <span class="p-author h-card" itemprop="name"
+            >{{ author }}</span
+          ></span
+        >
+        {%- if forloop.last == false %}, {% endif -%} {% endfor %}
       </div>
-      {%- endif %}
+      {%- endif %} {%- assign words = content | number_of_words -%} {%- assign
+      mins = words | divided_by: 200 -%} {%- if mins < 1 %}{% assign mins = 1
+      %}{% endif -%}
+      <span class="bullet-divider">•</span>
+      <span class="read-time">{{ mins }} min read</span>
     </div>
   </header>
 
-  <div class="post-content e-content" itemprop="articleBody">
-    {{ content }}
-  </div>
+  <nav id="toc-container" class="post-toc" style="display: none"></nav>
 
-  {% if jekyll.environment == 'production' -%}
-    {% if page.comments == false -%}
-    <div class="comments-disabled-message">
-      Comments have been disabled for this post.
-    </div>
-    {% else -%}
-      {%- include comments.html -%}
-    {% endif -%}
-  {% endif -%}
+  <div class="post-content e-content" itemprop="articleBody">{{ content }}</div>
+
+  {% if page.comments == false -%}
+  <div class="comments-disabled-message">
+    Comments have been disabled for this post.
+  </div>
+  {% else -%} {%- include comments.html -%} {% endif -%}
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 </article>
+
+<script>
+  // Add anchor links to all headings with an id inside post content
+  document
+    .querySelectorAll(
+      ".post-content h1[id], .post-content h2[id], .post-content h3[id], .post-content h4[id], .post-content h5[id], .post-content h6[id]",
+    )
+    .forEach(function (heading) {
+      var anchor = document.createElement("a");
+      anchor.className = "heading-anchor";
+      anchor.href = "#" + heading.id;
+      anchor.setAttribute("aria-label", "Link to this section");
+      anchor.innerHTML = '<i class="fa-solid fa-link"></i>';
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        var url =
+          window.location.origin + window.location.pathname + "#" + heading.id;
+        navigator.clipboard.writeText(url).then(function () {
+          anchor.classList.add("copied");
+          setTimeout(function () {
+            anchor.classList.remove("copied");
+          }, 1500);
+        });
+        history.replaceState(null, "", "#" + heading.id);
+      });
+      heading.insertBefore(anchor, heading.firstChild);
+    });
+
+  // Build Table of Contents
+  (function () {
+    var headings = document.querySelectorAll(
+      ".post-content h2[id], .post-content h3[id], .post-content h4[id]",
+    );
+    if (headings.length < 3) return;
+
+    var tocContainer = document.getElementById("toc-container");
+    var details = document.createElement("details");
+    details.className = "toc-details";
+    details.open = false;
+
+    var summary = document.createElement("summary");
+    summary.className = "toc-summary";
+    summary.textContent = "Contents";
+    details.appendChild(summary);
+
+    var list = document.createElement("ul");
+    list.className = "toc-list";
+
+    headings.forEach(function (h) {
+      var li = document.createElement("li");
+      var level = parseInt(h.tagName.charAt(1), 10);
+      li.className = "toc-level-" + level;
+      var a = document.createElement("a");
+      a.href = "#" + h.id;
+      a.textContent = h.textContent.replace(/^\s*/, "");
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+
+    details.appendChild(list);
+    tocContainer.appendChild(details);
+    tocContainer.style.display = "";
+  })();
+
+  // Reading progress bar — smooth with color transition
+  (function () {
+    var container = document.querySelector(".reading-progress-container");
+    var bar = document.getElementById("reading-progress");
+    var article = document.querySelector(".post-content");
+    if (!bar || !article || !container) return;
+
+    var brandColor =
+      getComputedStyle(document.documentElement)
+        .getPropertyValue("--minima-brand-color")
+        .trim() || "#2a7ae2";
+    var greenColor = "#28a745";
+
+    function lerpColor(a, b, t) {
+      var ah = parseInt(a.replace("#", ""), 16);
+      var bh = parseInt(b.replace("#", ""), 16);
+      var ar = (ah >> 16) & 0xff,
+        ag = (ah >> 8) & 0xff,
+        ab = ah & 0xff;
+      var br = (bh >> 16) & 0xff,
+        bg = (bh >> 8) & 0xff,
+        bb = bh & 0xff;
+      var rr = Math.round(ar + (br - ar) * t);
+      var rg = Math.round(ag + (bg - ag) * t);
+      var rb = Math.round(ab + (bb - ab) * t);
+      return (
+        "#" + ((1 << 24) + (rr << 16) + (rg << 8) + rb).toString(16).slice(1)
+      );
+    }
+
+    function updateProgress() {
+      var rect = article.getBoundingClientRect();
+      var articleTop = rect.top + window.scrollY;
+      var articleHeight = article.offsetHeight;
+      var scrolled = window.scrollY - articleTop;
+      var pct = Math.max(
+        0,
+        Math.min(100, (scrolled / (articleHeight - window.innerHeight)) * 100),
+      );
+
+      // Show/hide container based on actual progress
+      if (pct > 0.5 && window.scrollY > 50) {
+        container.classList.add("visible");
+      } else {
+        container.classList.remove("visible");
+        bar.style.width = "0%";
+        return;
+      }
+
+      bar.style.width = pct + "%";
+
+      // Gradual color transition: brand -> green from 70% onward
+      if (pct < 70) {
+        bar.style.background = brandColor;
+      } else {
+        var t = (pct - 70) / 30; // 0 at 70%, 1 at 100%
+        bar.style.background = lerpColor(brandColor, greenColor, t);
+      }
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress, { passive: true });
+  })();
+</script>

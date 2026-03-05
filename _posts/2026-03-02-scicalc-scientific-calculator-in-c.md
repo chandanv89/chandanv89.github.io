@@ -3,7 +3,15 @@ layout: post
 title: "SciCalc — I Built a Full Scientific Calculator in C (and It Got Out of Hand)"
 date: 2026-03-02
 categories: [projects, c-programming, engineering]
-tags: [c, calculator, scientific-calculator, recursive-descent-parser, engineering, college-project]
+tags:
+  [
+    c,
+    calculator,
+    scientific-calculator,
+    recursive-descent-parser,
+    engineering,
+    college-project,
+  ]
 description: "The story of how a simple 'Hello World'-era C assignment spiraled into a 13-module, 158-test scientific calculator that rivals a TI-36X Pro. A deep dive into every feature, the math behind it, and what I learned along the way."
 image: /assets/images/scicalc/scicalc-banner.png
 math: true
@@ -25,7 +33,7 @@ int main() {
 }
 ```
 
-I was *hooked*. Something about making a machine obey your commands felt like wielding a spell. Within a week, I'd gone from `Hello World` to a simple calculator that could add two numbers. Within a month… well, let's just say things escalated.
+I was _hooked_. Something about making a machine obey your commands felt like wielding a spell. Within a week, I'd gone from `Hello World` to a simple calculator that could add two numbers. Within a month… well, let's just say things escalated.
 
 > **What started as a humble `a + b` calculator mutated into a 13-module, 158-test, recursive-descent-parsing beast of a scientific calculator.**
 
@@ -33,9 +41,9 @@ Fast forward to 2026. I'm a full-time **Senior Java Developer** now — my days 
 
 So when I recently discovered this project while cleaning out my Google Drive and old backups — buried under folders of lab records and assignment PDFs — my heart genuinely skipped a beat. There it was: **SciCalc**.
 
-And here's the part that *floored* me: I unzipped the archive, ran `make`, and **it compiled. First try. Zero errors. Zero warnings. Not a single line of code changed.** Nearly two decades later, and `gcc` just… built it. C89/90 (GNU89) rocks! That's the beauty of a language with a stable standard and no runtime magic. I sat there staring at the terminal, equal parts stunned and giddy.
+And here's the part that _floored_ me: I unzipped the archive, ran `make`, and **it compiled. First try. Zero errors. Zero warnings. Not a single line of code changed.** Nearly two decades later, and `gcc` just… built it. C89/90 (GNU89) rocks! That's the beauty of a language with a stable standard and no runtime magic. I sat there staring at the terminal, equal parts stunned and giddy.
 
-That moment — that rush of nostalgia, that thrill of reliving my college days — is exactly why I'm writing this blog post. Call it a trip down memory lane. Call it rekindling an old flame with a programming language. Past-me went *absolutely feral* with this thing, and present-me is here to tell the story. 🤓
+That moment — that rush of nostalgia, that thrill of reliving my college days — is exactly why I'm writing this blog post. Call it a trip down memory lane. Call it rekindling an old flame with a programming language. Past-me went _absolutely feral_ with this thing, and present-me is here to tell the story. 🤓
 
 ---
 
@@ -97,21 +105,21 @@ Huge thanks to magazines like **Linux For You** (now, _[OpenSource For You](http
 
 ## Feature Deep Dive
 
-Now let's get to the good stuff. Buckle up — there are *a lot* of features.
+Now let's get to the good stuff. Buckle up — there are _a lot_ of features.
 
 ### 1. The Expression Parser
 
 This is the crown jewel. I wrote a **hand-rolled [recursive-descent parser](https://en.wikipedia.org/wiki/Recursive_descent_parser)** that correctly handles [operator precedence](https://en.wikipedia.org/wiki/Order_of_operations). No `eval()` cheating. No libraries. Just pure, hand-crafted grammar parsing.
 
-| Precedence  | Operators                                | Associativity |
-| :---------: | ---------------------------------------- | :-----------: |
-| 1 (lowest)  | `+` `-`                                  |     Left      |
-|      2      | `*` `/` `%`                              |     Left      |
-|      2      | Implicit multiplication: `2pi`, `3(4+5)` |     Left      |
-|      3      | `^` (exponentiation)                     |   **Right**   |
-|      4      | Unary `+` `-`                            |     Right     |
-|      5      | Postfix `!` (factorial)                  |     Left      |
-| 6 (highest) | `()`, `                                  |       …       | `, functions, numbers, constants | — |
+| Precedence  | Operators                                                 | Associativity |
+| :---------: | --------------------------------------------------------- | :-----------: |
+| 1 (lowest)  | `+` `-`                                                   |     Left      |
+|      2      | `*` `/` `%`                                               |     Left      |
+|      2      | Implicit multiplication: `2pi`, `3(4+5)`                  |     Left      |
+|      3      | `^` (exponentiation)                                      |   **Right**   |
+|      4      | Unary `+` `-`                                             |     Right     |
+|      5      | Postfix `!` (factorial)                                   |     Left      |
+| 6 (highest) | `()`, $\lvert\ldots\rvert$, functions, numbers, constants |       —       |
 
 **What makes it cool:**
 
@@ -119,7 +127,7 @@ This is the crown jewel. I wrote a **hand-rolled [recursive-descent parser](http
 - **Implicit multiplication**: Type `2pi` and get $2\pi \approx 6.283$. Type `3(4+5)` and get $27$. The parser figures it out.
 - **Absolute value bars**: `|-7|` returns `7`. Nested absolute values work too.
 - **30+ single-argument functions** and **13 two-argument functions** recognized by the parser.
-- **Descriptive error messages**: Tells you *where* in your expression things went wrong.
+- **Descriptive error messages**: Tells you _where_ in your expression things went wrong.
 
 ```
 [RAD]> 2 + 3 * 4
@@ -208,18 +216,18 @@ A full suite of [trigonometric](https://en.wikipedia.org/wiki/Trigonometric_func
 
 **Hyperbolic functions:**
 
-| Function           | Syntax    | Inverse                |
-| ------------------ | --------- | ---------------------- |
-| Hyperbolic sine    | `sinh(x)` | `asinh(x)`             |
-| Hyperbolic cosine  | `cosh(x)` | `acosh(x)` (x ≥ 1)     |
-| Hyperbolic tangent | `tanh(x)` | `atanh(x)` (\|x\| < 1) |
+| Function           | Syntax    | Inverse                    |
+| ------------------ | --------- | -------------------------- |
+| Hyperbolic sine    | `sinh(x)` | `asinh(x)`                 |
+| Hyperbolic cosine  | `cosh(x)` | `acosh(x)` ($x \ge 1$)     |
+| Hyperbolic tangent | `tanh(x)` | `atanh(x)` ($\|x\| \lt 1$) |
 
 **Three angle modes** — switchable at any time during a session:
 
 | Mode                                                      | Full Circle | Command |
 | --------------------------------------------------------- | ----------- | ------- |
 | [Radians](https://en.wikipedia.org/wiki/Radian) (default) | $2\pi$      | `rad`   |
-| [Degrees](https://en.wikipedia.org/wiki/Degree_(angle))   | 360°        | `deg`   |
+| [Degrees](<https://en.wikipedia.org/wiki/Degree_(angle)>) | 360°        | `deg`   |
 | [Gradians](https://en.wikipedia.org/wiki/Gradian)         | 400 grad    | `grad`  |
 
 ```
@@ -331,8 +339,8 @@ A comprehensive statistics module accessible via the interactive `stats` menu. E
 | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- | ----------------------------------------- |
 | [Arithmetic Mean](https://en.wikipedia.org/wiki/Arithmetic_mean)                                       | Average of all values                                                           | $\mu = \frac{\sum x_i}{n}$                |
 | [Median](https://en.wikipedia.org/wiki/Median)                                                         | Middle value (sorted)                                                           | —                                         |
-| [Mode](https://en.wikipedia.org/wiki/Mode_(statistics))                                                | Most frequent value                                                             | —                                         |
-| [Range](https://en.wikipedia.org/wiki/Range_(statistics))                                              | $\max - \min$                                                                   | —                                         |
+| [Mode](<https://en.wikipedia.org/wiki/Mode_(statistics)>)                                              | Most frequent value                                                             | —                                         |
+| [Range](<https://en.wikipedia.org/wiki/Range_(statistics)>)                                            | $\max - \min$                                                                   | —                                         |
 | [Population Variance](https://en.wikipedia.org/wiki/Variance)                                          | Spread of data                                                                  | $\sigma^2 = \frac{\sum(x_i - \mu)^2}{n}$  |
 | [Sample Variance](https://en.wikipedia.org/wiki/Variance#Sample_variance)                              | With [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction) | $s^2 = \frac{\sum(x_i - \bar{x})^2}{n-1}$ |
 | [Population Std Dev](https://en.wikipedia.org/wiki/Standard_deviation)                                 | $\sigma = \sqrt{\sigma^2}$                                                      | —                                         |
@@ -361,7 +369,7 @@ The dataset size supports up to **1,000 data points**, which is plenty for class
 
 ### 7. Matrix Operations
 
-Full [matrix algebra](https://en.wikipedia.org/wiki/Matrix_(mathematics)) for systems up to **10 × 10**, accessible via the interactive `matrix` menu:
+Full [matrix algebra](<https://en.wikipedia.org/wiki/Matrix_(mathematics)>) for systems up to **10 × 10**, accessible via the interactive `matrix` menu:
 
 | Operation                                                                  | Method                                                                                                         | Syntax (Menu-driven)          |
 | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ----------------------------- |
@@ -369,10 +377,10 @@ Full [matrix algebra](https://en.wikipedia.org/wiki/Matrix_(mathematics)) for sy
 | Multiplication                                                             | Standard $O(n^3)$                                                                                              | Enter two compatible matrices |
 | Scalar Multiplication                                                      | $cA$                                                                                                           | Enter matrix and scalar       |
 | [Transpose](https://en.wikipedia.org/wiki/Transpose)                       | $A^T$                                                                                                          | Enter a matrix                |
-| [Trace](https://en.wikipedia.org/wiki/Trace_(linear_algebra))              | $\sum a_{ii}$                                                                                                  | Sum of diagonal elements      |
+| [Trace](<https://en.wikipedia.org/wiki/Trace_(linear_algebra)>)            | $\sum a_{ii}$                                                                                                  | Sum of diagonal elements      |
 | [Determinant](https://en.wikipedia.org/wiki/Determinant)                   | [LU decomposition](https://en.wikipedia.org/wiki/LU_decomposition) with partial pivoting                       | Enter a square matrix         |
 | [Inverse](https://en.wikipedia.org/wiki/Invertible_matrix)                 | [Gauss–Jordan elimination](https://en.wikipedia.org/wiki/Gaussian_elimination#Finding_the_inverse_of_a_matrix) | Enter a non-singular matrix   |
-| [Rank](https://en.wikipedia.org/wiki/Rank_(linear_algebra))                | [Row echelon form](https://en.wikipedia.org/wiki/Row_echelon_form)                                             | Enter any matrix              |
+| [Rank](<https://en.wikipedia.org/wiki/Rank_(linear_algebra)>)              | [Row echelon form](https://en.wikipedia.org/wiki/Row_echelon_form)                                             | Enter any matrix              |
 | [Solve $Ax = b$](https://en.wikipedia.org/wiki/System_of_linear_equations) | [Gaussian elimination](https://en.wikipedia.org/wiki/Gaussian_elimination) with back-substitution              | Enter $A$ and $b$             |
 | [Identity Matrix](https://en.wikipedia.org/wiki/Identity_matrix)           | $I_n$                                                                                                          | Specify dimension             |
 
@@ -394,17 +402,17 @@ The calculator applies Gaussian elimination to find $x_1 = 5$, $x_2 = -6$.
 
 Full [complex number](https://en.wikipedia.org/wiki/Complex_number) support accessible via the `complex` menu:
 
-| Operation                                                                     | Description                                                                                                      |
-| ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Create                                                                        | Rectangular $(a + bi)$ and [polar form](https://en.wikipedia.org/wiki/Polar_coordinate_system) $(r\angle\theta)$ |
-| Arithmetic                                                                    | $+$, $-$, $\times$, $\div$                                                                                       |
-| [Magnitude](https://en.wikipedia.org/wiki/Absolute_value#Complex_numbers)     | $\|z\| = \sqrt{a^2 + b^2}$                                                                                       |
-| [Phase / Argument](https://en.wikipedia.org/wiki/Argument_(complex_analysis)) | $\arg(z) = \text{atan2}(b, a)$                                                                                   |
-| [Conjugate](https://en.wikipedia.org/wiki/Complex_conjugate)                  | $z^* = a - bi$                                                                                                   |
-| Complex Power                                                                 | $z^n$                                                                                                            |
-| Complex Square Root                                                           | Principal $\sqrt{z}$                                                                                             |
-| [Complex Exponential](https://en.wikipedia.org/wiki/Euler%27s_formula)        | $e^z = e^a(\cos b + i \sin b)$ — [Euler's formula](https://en.wikipedia.org/wiki/Euler%27s_formula)!             |
-| [Complex Logarithm](https://en.wikipedia.org/wiki/Complex_logarithm)          | $\ln(z) = \ln\|z\| + i\arg(z)$                                                                                   |
+| Operation                                                                       | Description                                                                                                      |
+| ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Create                                                                          | Rectangular $(a + bi)$ and [polar form](https://en.wikipedia.org/wiki/Polar_coordinate_system) $(r\angle\theta)$ |
+| Arithmetic                                                                      | $+$, $-$, $\times$, $\div$                                                                                       |
+| [Magnitude](https://en.wikipedia.org/wiki/Absolute_value#Complex_numbers)       | $\|z\| = \sqrt{a^2 + b^2}$                                                                                       |
+| [Phase / Argument](<https://en.wikipedia.org/wiki/Argument_(complex_analysis)>) | $\arg(z) = \text{atan2}(b, a)$                                                                                   |
+| [Conjugate](https://en.wikipedia.org/wiki/Complex_conjugate)                    | $z^* = a - bi$                                                                                                   |
+| Complex Power                                                                   | $z^n$                                                                                                            |
+| Complex Square Root                                                             | Principal $\sqrt{z}$                                                                                             |
+| [Complex Exponential](https://en.wikipedia.org/wiki/Euler%27s_formula)          | $e^z = e^a(\cos b + i \sin b)$ — [Euler's formula](https://en.wikipedia.org/wiki/Euler%27s_formula)!             |
+| [Complex Logarithm](https://en.wikipedia.org/wiki/Complex_logarithm)            | $\ln(z) = \ln\|z\| + i\arg(z)$                                                                                   |
 
 The complex exponential is arguably the most beautiful equation in mathematics, connecting $e$, $i$, $\pi$, 1, and 0 in [Euler's identity](https://en.wikipedia.org/wiki/Euler%27s_identity):
 
@@ -431,27 +439,27 @@ Practical engineering [unit conversions](https://en.wikipedia.org/wiki/Conversio
 
 **Length:**
 
-| Conversion           | Factor             |
-| -------------------- | ------------------ |
-| Meters ↔ Feet        | 1 m = 3.28084 ft   |
-| Kilometres ↔ Miles   | 1 km = 0.621371 mi |
-| Inches ↔ Centimetres | 1 in = 2.54 cm     |
+| Conversion           | Factor                               |
+| -------------------- | ------------------------------------ |
+| Meters ↔ Feet        | $1 \text{ m} = 3.28084 \text{ ft}$   |
+| Kilometres ↔ Miles   | $1 \text{ km} = 0.621371 \text{ mi}$ |
+| Inches ↔ Centimetres | $1 \text{ in} = 2.54 \text{ cm}$     |
 
-**Mass:** Kilograms ↔ Pounds (1 kg = 2.20462 lbs)
+**Mass:** Kilograms ↔ Pounds ($1 \text{ kg} = 2.20462 \text{ lbs}$)
 
 **Energy:**
 
 | Conversion              | Factor                                           |
 | ----------------------- | ------------------------------------------------ |
-| Joules ↔ Calories       | 1 cal = 4.184 J                                  |
+| Joules ↔ Calories       | $1 \text{ cal} = 4.184 \text{ J}$                |
 | Electron-volts ↔ Joules | $1 \text{ eV} = 1.602 \times 10^{-19} \text{ J}$ |
 
 **Pressure:**
 
-| Conversion            | Factor             |
-| --------------------- | ------------------ |
-| Pascals ↔ Atmospheres | 1 atm = 101,325 Pa |
-| Pascals ↔ PSI         | 1 PSI = 6894.76 Pa |
+| Conversion            | Factor                                  |
+| --------------------- | --------------------------------------- |
+| Pascals ↔ Atmospheres | $1 \text{ atm} = 101{,}325 \text{ Pa}$  |
+| Pascals ↔ PSI         | $1 \text{ PSI} = 6{,}894.76 \text{ Pa}$ |
 
 **Angle:** Degrees ↔ Radians ↔ Gradians
 
@@ -489,14 +497,14 @@ Built-in constants usable directly in expressions — because nobody wants to ty
 
 **Mathematical Constants (usable in expressions):**
 
-| Constant                                                                  | Symbol  | Value                    |
-| ------------------------------------------------------------------------- | ------- | ------------------------ |
-| [Pi](https://en.wikipedia.org/wiki/Pi)                                    | `pi`    | $3.14159265358979\ldots$ |
-| [Euler's number](https://en.wikipedia.org/wiki/E_(mathematical_constant)) | `e`     | $2.71828182845905\ldots$ |
-| [Golden ratio](https://en.wikipedia.org/wiki/Golden_ratio)                | `phi`   | $1.61803398874989\ldots$ |
-| [$\sqrt{2}$](https://en.wikipedia.org/wiki/Square_root_of_2)              | `sqrt2` | $1.41421356237310\ldots$ |
-| [$\sqrt{3}$](https://en.wikipedia.org/wiki/Square_root_of_3)              | `sqrt3` | $1.73205080756888\ldots$ |
-| Infinity                                                                  | `inf`   | $\infty$                 |
+| Constant                                                                    | Symbol  | Value                    |
+| --------------------------------------------------------------------------- | ------- | ------------------------ |
+| [Pi](https://en.wikipedia.org/wiki/Pi)                                      | `pi`    | $3.14159265358979\ldots$ |
+| [Euler's number](<https://en.wikipedia.org/wiki/E_(mathematical_constant)>) | `e`     | $2.71828182845905\ldots$ |
+| [Golden ratio](https://en.wikipedia.org/wiki/Golden_ratio)                  | `phi`   | $1.61803398874989\ldots$ |
+| [$\sqrt{2}$](https://en.wikipedia.org/wiki/Square_root_of_2)                | `sqrt2` | $1.41421356237310\ldots$ |
+| [$\sqrt{3}$](https://en.wikipedia.org/wiki/Square_root_of_3)                | `sqrt3` | $1.73205080756888\ldots$ |
+| Infinity                                                                    | `inf`   | $\infty$                 |
 
 **Physical Constants ([SI units](https://en.wikipedia.org/wiki/International_System_of_Units), [2019 redefinition](https://en.wikipedia.org/wiki/2019_redefinition_of_the_SI_base_units)):**
 
@@ -513,7 +521,7 @@ Built-in constants usable directly in expressions — because nobody wants to ty
 | [Electron mass](https://en.wikipedia.org/wiki/Electron_mass)                   | $9.109 \times 10^{-31}$ | kg          |
 | [Proton mass](https://en.wikipedia.org/wiki/Proton#Mass)                       | $1.673 \times 10^{-27}$ | kg          |
 | [Standard gravity](https://en.wikipedia.org/wiki/Standard_gravity)             | $9.80665$               | m/s²        |
-| [Standard atmosphere](https://en.wikipedia.org/wiki/Atmosphere_(unit))         | $101{,}325$             | Pa          |
+| [Standard atmosphere](<https://en.wikipedia.org/wiki/Atmosphere_(unit)>)       | $101{,}325$             | Pa          |
 
 ```
 [RAD]> 2pi
@@ -593,7 +601,7 @@ Here's a table of the serious algorithms that power SciCalc:
 
 ### Prerequisites
 
-- **GCC 4.9+** (or any [C11](https://en.wikipedia.org/wiki/C11_(C_standard_revision))-compatible compiler)
+- **GCC 4.9+** (or any [C11](<https://en.wikipedia.org/wiki/C11_(C_standard_revision)>)-compatible compiler)
 - **GNU Make 3.81+**
 - **C math library** (linked via `-lm`)
 
@@ -645,13 +653,13 @@ This runs **158 automated tests** across **10 test suites**:
 
 | Suite         | What's Tested                                                                                          |
 | ------------- | ------------------------------------------------------------------------------------------------------ |
-| Arithmetic    | Basic ops, power/root, abs/sign, rounding, GCD/LCM, primality                                          |
-| Trigonometry  | sin/cos/tan, csc/sec/cot, inverse, hyperbolic, angle modes                                             |
-| Logarithmic   | ln, log10, log2, logb, exp, exp2                                                                       |
-| Combinatorics | Factorial (0–20), Γ(x), nPr, nCr, Fibonacci                                                            |
-| Statistics    | Mean, median, mode, range, variance, stddev, correlation, regression                                   |
-| Matrix        | Identity, multiply, determinant, inverse, rank, solve Ax=b                                             |
-| Complex       | Arithmetic, magnitude, phase, conjugate, polar↔rectangular, exp, ln                                    |
+| Arithmetic    | Basic ops, power/root, `abs`/`sign`, rounding, `gcd`/`lcm`, primality                                  |
+| Trigonometry  | `sin`/`cos`/`tan`, `csc`/`sec`/`cot`, inverse, hyperbolic, angle modes                                 |
+| Logarithmic   | `ln`, `log10`, `log2`, `logb`, `exp`, `exp2`                                                           |
+| Combinatorics | Factorial (0–20), $\Gamma(x)$, `nPr`, `nCr`, Fibonacci                                                 |
+| Statistics    | Mean, median, mode, range, variance, std dev, correlation, regression                                  |
+| Matrix        | Identity, multiply, determinant, inverse, rank, solve $Ax = b$                                         |
+| Complex       | Arithmetic, magnitude, phase, conjugate, polar↔rectangular, `exp`, `ln`                                |
 | Conversion    | Temperature, length, mass, energy, pressure, base conversions                                          |
 | Memory        | Store/recall, M+/M−, clear, user variables, history                                                    |
 | Parser        | Precedence, unary ops, implicit multiplication, 30+ functions, scientific notation, nested expressions |
@@ -668,7 +676,7 @@ Looking back nearly two decades later — now as a Senior Java Developer who spe
 What started as "add two numbers" became a full scientific calculator with matrix operations and probability distributions. Sometimes the best learning happens when you follow your curiosity down the rabbit hole.
 
 **2. C teaches you discipline that stays with you forever.**
-There's no garbage collector to save you. No exception handling to catch your falls. Every buffer has a size. Every pointer has a responsibility. C forces you to think about *everything*, and that's a superpower. Honestly, I'm a better Java developer *because* I started with C. When you've manually managed memory, you never take a garbage collector for granted. When you've debugged a segfault at 2 AM, a `NullPointerException` feels almost… gentle.
+There's no garbage collector to save you. No exception handling to catch your falls. Every buffer has a size. Every pointer has a responsibility. C forces you to think about _everything_, and that's a superpower. Honestly, I'm a better Java developer _because_ I started with C. When you've manually managed memory, you never take a garbage collector for granted. When you've debugged a segfault at 2 AM, a `NullPointerException` feels almost… gentle.
 
 **3. Writing a parser is a rite of passage.**
 Every programmer should write a recursive-descent parser at least once. It's the moment you go from "I use programming languages" to "I understand how programming languages work."
@@ -680,7 +688,7 @@ Splitting the code into clean modules with well-defined interfaces made it possi
 158 tests meant I could refactor confidently. Change the implementation of `sin()`? Run the tests. Add implicit multiplication to the parser? Run the tests. Past-me understood this instinctively.
 
 **6. I really, truly miss coding in C.**
-Java is powerful, productive, and pays the bills. But C has a certain *purity* to it. There's no magic. No hidden allocations. No framework doing things behind your back. You write what you mean, and the machine does exactly that. Finding this project and watching it compile without a single change after all these years reminded me why I fell in love with programming in the first place. It wasn't about the frameworks or the design patterns — it was about the sheer joy of making a computer do something *cool*.
+Java is powerful, productive, and pays the bills. But C has a certain _purity_ to it. There's no magic. No hidden allocations. No framework doing things behind your back. You write what you mean, and the machine does exactly that. Finding this project and watching it compile without a single change after all these years reminded me why I fell in love with programming in the first place. It wasn't about the frameworks or the design patterns — it was about the sheer joy of making a computer do something _cool_.
 
 ---
 
@@ -691,19 +699,19 @@ For quick reference, here are all functions recognized by the expression parser:
 **Single-argument functions (30+):**
 
 ```
-sin  cos  tan  asin  acos  atan  csc  sec  cot
-sinh cosh tanh asinh acosh atanh
-ln   log  log10 log2  exp  exp2
-sqrt cbrt abs  ceil  floor round trunc sign
-factorial gamma fib  deg  rad
+sin  cos  tan   asin  acos  atan  csc   sec  cot
+sinh cosh tanh  asinh acosh atanh
+ln   log  log10 log2  exp   exp2
+sqrt cbrt abs   ceil  floor round trunc sign
+factorial gamma fib   deg   rad
 ```
 
 **Two-argument functions (13):**
 
 ```
-pow(a,b)   root(x,n)    mod(a,b)    max(a,b)    min(a,b)
-gcd(a,b)   lcm(a,b)     logb(x,b)   atan2(y,x)
-perm(n,r)  comb(n,r)     nPr(n,r)    nCr(n,r)
+pow(a,b)   root(x,n)  mod(a,b)   max(a,b)    min(a,b)
+gcd(a,b)   lcm(a,b)   logb(x,b)  atan2(y,x)
+perm(n,r)  comb(n,r)  nPr(n,r)   nCr(n,r)
 ```
 
 ---
@@ -721,15 +729,17 @@ The source code is on GitHub: **[github.com/chandanv89/scicalc](https://github.c
 Star it if you like it. Fork it if you want to add eigenvalue decomposition (I clearly ran out of time). Or just marvel at what a caffeinated engineering freshman can accomplish with `gcc` and a dream.
 
 ---
+
 #### Footnotes
 
 [[1](#what-is-scicalc)] _About C89/90 and C11 Compatibility_
-><small>C11 is a superset of C89/C90 — nearly all valid C89 code is valid C11. There are only a handful of minor breaking changes introduced across C99 and C11:
+
+> <small>C11 is a superset of C89/C90 — nearly all valid C89 code is valid C11. There are only a handful of minor breaking changes introduced across C99 and C11:
 >
-><small>Implicit int removed (C99) — e.g., main() without int return type. But your code already uses int main().
-Implicit function declarations removed (C99) — calling a function without a prior declaration/include. Well-written code with proper #include headers (like yours) is unaffected.
-gets() removed (C11) — replaced by fgets(). Your code uses fgets()-style input via util_read_line().
+> <small>Implicit int removed (C99) — e.g., main() without int return type. But your code already uses int main().
+> Implicit function declarations removed (C99) — calling a function without a prior declaration/include. Well-written code with proper #include headers (like yours) is unaffected.
+> gets() removed (C11) — replaced by fgets(). Your code uses fgets()-style input via util_read_line().
 >
-><small>That's basically it. If the code was reasonably well-written C89 — used explicit types, included proper headers, didn't rely on gets() — it compiles under -std=c11 with zero issues. >Which is exactly what happened with SciCalc.
+> <small>That's basically it. If the code was reasonably well-written C89 — used explicit types, included proper headers, didn't rely on gets() — it compiles under -std=c11 with zero issues. >Which is exactly what happened with SciCalc.
 >
-><small>The code was written in the C89/C90 era (2007–08), but because C is so backward-compatible, it compiles cleanly under modern GCC with -std=c11. The "C11" in the Makefile and table > >just reflects the current build target, not the era it was written in. That's actually part of what makes the story compelling — C's stability across decades.
+> <small>The code was written in the C89/C90 era (2007–08), but because C is so backward-compatible, it compiles cleanly under modern GCC with -std=c11. The "C11" in the Makefile and table > >just reflects the current build target, not the era it was written in. That's actually part of what makes the story compelling — C's stability across decades.

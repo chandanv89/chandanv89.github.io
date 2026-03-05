@@ -1,18 +1,48 @@
-{% if site.disqus.shortname -%}
-  <div id="disqus_thread"></div>
+<section class="post-comments">
+  <hr />
+  <h2 class="post-comments-title">Comments</h2>
+
   <script>
-    var disqus_config = function () {
-      this.page.url = '{{ page.url | absolute_url }}';
-      this.page.identifier = '{{ page.id }}';
-    };
-    (function() {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://{{ site.disqus.shortname }}.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
+    // Determine initial Giscus theme to match minima "auto" skin
+    function getGiscusTheme() {
+      return window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark_dimmed"
+        : "light";
+    }
+
+    // Dynamically insert the Giscus script with the correct theme
+    (function () {
+      var script = document.createElement("script");
+      script.src = "https://giscus.app/client.js";
+      script.setAttribute("data-repo", "chandanv89/chandanv89.github.io");
+      script.setAttribute("data-repo-id", "R_kgDOImr0ag");
+      script.setAttribute("data-category", "General");
+      script.setAttribute("data-category-id", "DIC_kwDOImr0as4C3v5h");
+      script.setAttribute("data-mapping", "pathname");
+      script.setAttribute("data-strict", "0");
+      script.setAttribute("data-reactions-enabled", "1");
+      script.setAttribute("data-emit-metadata", "0");
+      script.setAttribute("data-input-position", "top");
+      script.setAttribute("data-theme", getGiscusTheme());
+      script.setAttribute("data-lang", "en");
+      script.setAttribute("data-loading", "lazy");
+      script.crossOrigin = "anonymous";
+      script.async = true;
+      document.currentScript.parentElement.appendChild(script);
     })();
+
+    // Listen for OS-level theme changes and update Giscus in real time
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", function (e) {
+        var theme = e.matches ? "dark_dimmed" : "light";
+        var iframe = document.querySelector("iframe.giscus-frame");
+        if (iframe) {
+          iframe.contentWindow.postMessage(
+            { giscus: { setConfig: { theme: theme } } },
+            "https://giscus.app",
+          );
+        }
+      });
   </script>
-  <noscript>
-    Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-  </noscript>
-{% endif -%}
+</section>
