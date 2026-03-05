@@ -71,6 +71,7 @@ Output goes to `_site/`.
 ├── assets/              # Static assets (CSS, images, fonts)
 ├── about.markdown       # About page
 ├── work-experience.markdown
+├── tags.html            # Tags index page (filterable by hash)
 ├── index.markdown       # Home page
 └── Gemfile              # Ruby dependencies
 ```
@@ -88,6 +89,8 @@ Output goes to `_site/`.
 - Mermaid diagram support
 - Giscus comments with real-time theme switching
 - Custom fonts: Inter (headings/UI), Lora (body), Monaspace Xenon (code)
+- **Tag pills on posts** — clickable, styled pill badges rendered from frontmatter `tags`; link to the tags index page filtered by tag
+- **Tags index page** (`/tags/`) — displays all tags as a cloud with post counts; each tag section lists its posts with dates; URL hash filtering shows only the selected tag's posts
 
 ## License
 

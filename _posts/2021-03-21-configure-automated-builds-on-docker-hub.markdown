@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Configure Automated Builds on Docker Hub"
+date: 2021-03-21
+categories: [devops, docker, engineering]
+tags: [docker, docker-hub, ci-cd, github, automated-builds, devops]
+description: "How to integrate GitHub with Docker Hub to set up automated Docker image builds triggered by code pushes."
+---
+
 ![Integrate Github with Docker Hub to setup Automated Builds](/assets/images/post-2-header-image.png)
 
 In the [previous article](/2021/01/17/dockerize-your-spring-boot-application.html) successfully dockerized our demo Spring Boot application. Now, let's take a look at how we can leverage the Github and Docker Hub infrastructure to setup auto builds to trigger the creation of Docker images for our application whenever we push some changes to the code repository.

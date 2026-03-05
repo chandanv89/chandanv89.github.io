@@ -14,9 +14,35 @@
 
   <script type="module">
     import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
-    mermaid.initialize({ startOnLoad: true });
-    await mermaid.run({
-      querySelector: ".language-mermaid",
-    });
+
+    function getMermaidTheme() {
+      return window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "default";
+    }
+
+    // Store original diagram sources before first render
+    const diagrams = document.querySelectorAll(".language-mermaid");
+    const sources = Array.from(diagrams).map((el) => el.textContent);
+
+    async function renderMermaid() {
+      const theme = getMermaidTheme();
+      mermaid.initialize({ startOnLoad: false, theme });
+
+      // Restore original source text and reset processed state
+      diagrams.forEach((el, i) => {
+        el.removeAttribute("data-processed");
+        el.innerHTML = sources[i];
+      });
+
+      await mermaid.run({ nodes: Array.from(diagrams) });
+    }
+
+    await renderMermaid();
+
+    // Re-render when system theme changes
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", () => renderMermaid());
   </script>
 </head>

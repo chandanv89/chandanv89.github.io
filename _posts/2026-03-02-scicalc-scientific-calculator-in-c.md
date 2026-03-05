@@ -3,15 +3,7 @@ layout: post
 title: "SciCalc — I Built a Full Scientific Calculator in C (and It Got Out of Hand)"
 date: 2026-03-02
 categories: [projects, c-programming, engineering]
-tags:
-  [
-    c,
-    calculator,
-    scientific-calculator,
-    recursive-descent-parser,
-    engineering,
-    college-project,
-  ]
+tags: [c, coding, calculator, engineering, college-project]
 description: "The story of how a simple 'Hello World'-era C assignment spiraled into a 13-module, 158-test scientific calculator that rivals a TI-36X Pro. A deep dive into every feature, the math behind it, and what I learned along the way."
 image: /assets/images/scicalc/scicalc-banner.png
 math: true
@@ -49,7 +41,7 @@ That moment — that rush of nostalgia, that thrill of reliving my college days 
 
 ## What Is SciCalc?
 
-**SciCalc** is a fully-featured, modular scientific calculator written in **C11**<sup>^[1](#footnotes)</sup>. It's designed for engineering, science, and mathematics — think [TI-36X Pro](https://en.wikipedia.org/wiki/TI-36) or [Casio fx-991EX](https://en.wikipedia.org/wiki/Casio_fx-991EX), but it runs in your terminal and was written by a college kid who clearly had too much free time.
+**SciCalc** is a fully-featured, modular scientific calculator written in **C11**[^1]. It's designed for engineering, science, and mathematics — think [TI-36X Pro](https://en.wikipedia.org/wiki/TI-36) or [Casio fx-991EX](https://en.wikipedia.org/wiki/Casio_fx-991EX), but it runs in your terminal and was written by a college kid who clearly had too much free time.
 
 Here are the numbers that make me simultaneously proud and concerned about my younger self:
 
@@ -728,18 +720,4 @@ The source code is on GitHub: **[github.com/chandanv89/scicalc](https://github.c
 
 Star it if you like it. Fork it if you want to add eigenvalue decomposition (I clearly ran out of time). Or just marvel at what a caffeinated engineering freshman can accomplish with `gcc` and a dream.
 
----
-
-#### Footnotes
-
-[[1](#what-is-scicalc)] _About C89/90 and C11 Compatibility_
-
-> <small>C11 is a superset of C89/C90 — nearly all valid C89 code is valid C11. There are only a handful of minor breaking changes introduced across C99 and C11:
->
-> <small>Implicit int removed (C99) — e.g., main() without int return type. But your code already uses int main().
-> Implicit function declarations removed (C99) — calling a function without a prior declaration/include. Well-written code with proper #include headers (like yours) is unaffected.
-> gets() removed (C11) — replaced by fgets(). Your code uses fgets()-style input via util_read_line().
->
-> <small>That's basically it. If the code was reasonably well-written C89 — used explicit types, included proper headers, didn't rely on gets() — it compiles under -std=c11 with zero issues. >Which is exactly what happened with SciCalc.
->
-> <small>The code was written in the C89/C90 era (2007–08), but because C is so backward-compatible, it compiles cleanly under modern GCC with -std=c11. The "C11" in the Makefile and table > >just reflects the current build target, not the era it was written in. That's actually part of what makes the story compelling — C's stability across decades.
+[^1]: **About C89/90 and C11 Compatibility** — C11 is a superset of C89/C90 — nearly all valid C89 code is valid C11. There are only a handful of minor breaking changes introduced across C99 and C11:<br />1. Implicit `int` removed (C99) — e.g., `main()` without `int` return type, but the code already uses `int main()`.<br />2. Implicit function declarations removed (C99) — calling a function without a prior declaration/include; well-written code with proper `#include` headers is unaffected.<br />3. `gets()` removed (C11) — replaced by `fgets()`; SciCalc uses `fgets()`-style input via `util_read_line()`.<br />That's basically it. If the code was reasonably well-written C89 — used explicit types, included proper headers, didn't rely on `gets()` — it compiles under `-std=c11` with zero issues, which is exactly what happened with SciCalc. The code was written in the C89/C90 era (2007–08), but because C is so backward-compatible, it compiles cleanly under modern GCC with `-std=c11`. The "C11" in the Makefile and table just reflects the current build target, not the era it was written in.

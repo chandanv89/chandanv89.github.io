@@ -57,7 +57,15 @@ layout: base
 
   <div class="post-content e-content" itemprop="articleBody">{{ content }}</div>
 
-  {% if page.comments == false -%}
+  {% if page.tags.size > 0 %}
+  <div class="post-tags">
+    Tags: {% for tag in page.tags %}
+    <a class="tag-pill" href="/tags/#{{ tag | slugify }}" rel="tag"
+      >{{ tag }}</a
+    >
+    {% endfor %}
+  </div>
+  {% endif %} {% if page.comments == false -%}
   <div class="comments-disabled-message">
     Comments have been disabled for this post.
   </div>

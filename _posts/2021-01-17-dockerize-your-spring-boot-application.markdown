@@ -1,3 +1,11 @@
+---
+layout: post
+title: "Dockerize Your Spring Boot Application"
+date: 2021-01-17
+categories: [devops, docker, engineering]
+tags: [docker, spring-boot, java, devops, containerization, dockerfile]
+description: "A step-by-step guide to creating a Docker image for a Spring Boot application using a multi-stage Dockerfile."
+---
 ![](/assets/images/post-1-header-image.png)
 
 In this article, I’d like to walk you through how you can create a Docker image for a demo Spring Boot application. And, subsequently, we'll see how to setup a Github trigger to auto build the Docker image using the Docker Hub infrastructure.

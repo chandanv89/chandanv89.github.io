@@ -1,0 +1,71 @@
+---
+layout: page
+title: Tags
+permalink: /tags/
+---
+
+<div class="tags-overview">
+  {% assign sorted_tags = site.tags | sort %}
+  <div class="tag-cloud">
+    {% for tag in sorted_tags %}
+    <a class="tag-pill" href="#{{ tag[0] | slugify }}"
+      >{{ tag[0] }} <span class="tag-count">{{ tag[1].size }}</span></a
+    >
+    {% endfor %}
+  </div>
+
+  <p class="tags-filter-notice" style="display:none;">
+    Showing posts tagged <strong class="tags-filter-name"></strong>.
+    <a href="/tags/">Show all tags</a>
+  </p>
+
+  {% for tag in sorted_tags %}
+  <div class="tag-section" id="{{ tag[0] | slugify }}">
+    <h2 class="tag-heading">{{ tag[0] }}</h2>
+    <ul class="tag-post-list">
+      {% assign sorted_posts = tag[1] | sort: "date" | reverse %} {% for post in
+      sorted_posts %}
+      <li>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <span class="tag-post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</div>
+
+<script>
+  (function () {
+    function filterTags() {
+      var hash = window.location.hash.replace("#", "");
+      var sections = document.querySelectorAll(".tag-section");
+      var notice = document.querySelector(".tags-filter-notice");
+      var nameEl = document.querySelector(".tags-filter-name");
+
+      if (!hash) {
+        sections.forEach(function (s) { s.style.display = ""; });
+        if (notice) notice.style.display = "none";
+        return;
+      }
+
+      var found = false;
+      sections.forEach(function (s) {
+        if (s.id === hash) {
+          s.style.display = "";
+          found = true;
+        } else {
+          s.style.display = "none";
+        }
+      });
+
+      if (notice && nameEl && found) {
+        nameEl.textContent = hash;
+        notice.style.display = "";
+      }
+    }
+
+    filterTags();
+    window.addEventListener("hashchange", filterTags);
+  })();
+</script>
