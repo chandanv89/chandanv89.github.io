@@ -63,6 +63,7 @@ Output goes to `_site/`.
 ## Project Structure
 
 ```
+├── .github/workflows/   # GitHub Actions (scheduled build & deploy)
 ├── _config.yml          # Site configuration
 ├── _includes/           # Reusable HTML partials (head, footer, comments, etc.)
 ├── _layouts/            # Page templates (base, home, post, page)
@@ -91,6 +92,8 @@ Output goes to `_site/`.
 - Custom fonts: Inter (headings/UI), Lora (body), Monaspace Xenon (code)
 - **Tag pills on posts** — clickable, styled pill badges rendered from frontmatter `tags`; link to the tags index page filtered by tag
 - **Tags index page** (`/tags/`) — displays all tags as a cloud with post counts; each tag section lists its posts with dates; URL hash filtering shows only the selected tag's posts
+- **Future-dated posts** — `future: true` in config allows committing posts ahead of time; they go live on the next build
+- **Scheduled GitHub Actions build** — daily midnight UTC cron job rebuilds and deploys the site, automatically publishing future-dated posts when their date arrives; also triggers on push to `main` and supports manual dispatch
 
 ## License
 
