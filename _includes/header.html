@@ -10,7 +10,7 @@
         class="site-logo"
       />
       {%- if page.url == "/" %}
-        <span class="site-title-text">{{ site.author.name | escape }}</span>
+      <span class="site-title-text">{{ site.author.name | escape }}</span>
       {%- endif %}
     </a>
 
@@ -21,7 +21,8 @@
         <span class="menu-icon"></span>
       </label>
 
-      {% include nav-items.html paths = page_paths %}
+      {% include nav-items.html paths = page_paths %} {% include
+      theme-toggle.html %}
     </nav>
     {%- endunless %}
   </div>

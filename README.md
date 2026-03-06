@@ -80,7 +80,9 @@ Output goes to `_site/`.
 ## Customizations Over Base Minima
 
 - Auto light/dark theme with `prefers-color-scheme` sync
+- **Theme toggle switch** — sun/moon button in the navbar; smoothly animated icon rotation; respects system preference by default, saves manual choice to `localStorage`; all page colors, syntax highlighting, and mermaid diagrams update instantly
 - SVG favicon with dark mode support (CV monogram); dynamic header logo (icon + name on homepage, icon-only elsewhere)
+- **Custom 404 page** — giant "404" text with a live Matrix-style code rain animation (canvas-rendered); rain is clipped to the text shape via `globalCompositeOperation`; theme-aware background (dark/light); mouse-driven parallax panning of the rain within the text
 - Reading progress bar on posts (brand color → green gradient)
 - Collapsible Table of Contents (auto-generated from headings)
 - Estimated read time in post metadata
@@ -94,6 +96,7 @@ Output goes to `_site/`.
 - **Tags index page** (`/tags/`) — displays all tags as a cloud with post counts; each tag section lists its posts with dates; URL hash filtering shows only the selected tag's posts
 - **Future-dated posts** — `future: true` in config allows committing posts ahead of time; they go live on the next build
 - **Scheduled GitHub Actions build** — daily midnight UTC cron job rebuilds and deploys the site, automatically publishing future-dated posts when their date arrives; also triggers on push to `main` and supports manual dispatch
+- **Nav exclusion support** — pages can set `nav_exclude: true` in frontmatter to hide from the navigation bar
 
 ## License
 

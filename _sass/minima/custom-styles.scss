@@ -1,5 +1,111 @@
 // Placeholder to allow defining custom styles that override everything else.\n// (Use `_sass/minima/custom-variables.scss` to override variable defaults)
 
+// Smooth theme transition
+html {
+
+  &,
+  & * {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+}
+
+// Theme toggle button
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  margin-left: 0.6em;
+  border-radius: 50%;
+  color: $text-color;
+  position: relative;
+  width: 36px;
+  height: 36px;
+  vertical-align: middle;
+  transition: color 0.3s ease, background-color 0.2s ease;
+
+  &:hover {
+    background-color: $border-color-01;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $link-base-color;
+    outline-offset: 2px;
+  }
+
+  .theme-toggle-icon {
+    position: absolute;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+
+  .sun-icon {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+  }
+
+  .moon-icon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+// Dark state: show sun, hide moon
+html[data-theme="dark"] .theme-toggle {
+  .sun-icon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+
+  .moon-icon {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
+  }
+}
+
+// Light state: show moon, hide sun
+html[data-theme="light"] .theme-toggle {
+  .sun-icon {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+  }
+
+  .moon-icon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+// System dark: show sun (to indicate you can switch to light)
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .theme-toggle {
+    .sun-icon {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+
+    .moon-icon {
+      opacity: 0;
+      transform: rotate(90deg) scale(0.5);
+    }
+  }
+}
+
+// Mobile nav: place toggle inline
+@media screen and (max-width: $on-medium) {
+  .theme-toggle {
+    display: block;
+    margin: 5px 10px 5px 20px;
+  }
+}
+
+// Keep nav items and toggle on the same line
+.site-nav>.nav-items {
+  display: inline;
+}
+
 // Site logo in header
 .site-logo {
   height: 32px;

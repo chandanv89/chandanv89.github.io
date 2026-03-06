@@ -1,25 +1,262 @@
 ---
 permalink: /404.html
-layout: page
+layout: base
+title: "404 - Page Not Found"
+nav_exclude: true
 ---
 
-<style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
+<style type="text/css">
+  .error-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
     text-align: center;
+    user-select: none;
   }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
+
+  .error-code-wrap {
+    position: relative;
+    width: clamp(320px, 70vw, 900px);
+    height: clamp(130px, 28vw, 340px);
+    overflow: hidden;
+  }
+
+  .error-code-wrap canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .error-message {
+    margin-top: 1.2rem;
+    font-size: clamp(0.9rem, 2vw, 1.25rem);
+    color: #888;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .error-hint {
+    margin-top: 0.6rem;
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    color: #666;
+  }
+
+  .error-hint a {
+    color: #00cc66;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .error-hint a:hover {
+    border-bottom-color: #00cc66;
   }
 </style>
 
-<div class="container">
-  <h1>404</h1>
-
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
+<div class="error-page">
+  <div class="error-code-wrap" aria-label="404">
+    <canvas id="codeRain"></canvas>
+  </div>
+  <p class="error-message">You've ventured into the void</p>
+  <p class="error-hint">
+    This page doesn't exist. <a href="/">Head back home</a>.
+  </p>
 </div>
+
+<script>
+  (function () {
+    var canvas = document.getElementById("codeRain");
+    var ctx = canvas.getContext("2d");
+    var wrap = canvas.parentElement;
+
+    /* Offscreen canvas for the code rain */
+    var offscreen = document.createElement("canvas");
+    var offCtx = offscreen.getContext("2d");
+
+    var dpr = window.devicePixelRatio || 1;
+    var W, H, columns, drops, fontSize, textFontSize;
+    var isDark = true;
+
+    /* Parallax state */
+    var PAD = 40; /* extra pixels on each side for the rain canvas */
+    var offsetX = 0,
+      offsetY = 0;
+    var targetX = 0,
+      targetY = 0;
+    var LERP = 0.08; /* smoothing factor */
+
+    function getThemeIsDark() {
+      var dt = document.documentElement.getAttribute("data-theme");
+      if (dt === "dark") return true;
+      if (dt === "light") return false;
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+
+    function getBgColor() {
+      return isDark ? "#000" : "#f0f0f0";
+    }
+
+    function getTrailFade() {
+      return isDark ? "rgba(0, 0, 0, 0.06)" : "rgba(240, 240, 240, 0.06)";
+    }
+
+    var chars = "01{}[]()<>;:=/\\+-*&|!?#%@$~^_.abcdefghijklmnopqrstuvwxyz";
+    var keywords = [
+      "if",
+      "else",
+      "for",
+      "while",
+      "return",
+      "const",
+      "let",
+      "var",
+      "fn",
+      "def",
+      "int",
+      "void",
+      "null",
+      "true",
+      "false",
+      "import",
+      "class",
+      "new",
+      "try",
+      "catch",
+      "async",
+      "await",
+      "throw",
+      "404",
+      "err",
+      "git",
+      "push",
+      "pull",
+      "http",
+      "sql",
+      "SELECT",
+      "FROM",
+      "WHERE",
+      "println",
+      "printf",
+      "cout",
+      "main",
+      "func",
+      "pub",
+    ];
+
+    function resize() {
+      W = wrap.clientWidth;
+      H = wrap.clientHeight;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      offscreen.width = (W + PAD * 2) * dpr;
+      offscreen.height = (H + PAD * 2) * dpr;
+      canvas.style.width = W + "px";
+      canvas.style.height = H + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      offCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      var offW = W + PAD * 2;
+      var offH = H + PAD * 2;
+      fontSize = Math.max(10, Math.floor(offW / 55));
+      textFontSize = Math.min(W * 0.38, H * 0.85);
+      columns = Math.floor(offW / fontSize);
+      drops = [];
+      for (var i = 0; i < columns; i++) {
+        drops[i] = Math.random() * -50;
+      }
+      /* Fill offscreen on resize so trails don't carry over */
+      offCtx.fillStyle = getBgColor();
+      offCtx.fillRect(0, 0, offW, offH);
+    }
+
+    function pickChar() {
+      if (Math.random() < 0.15) {
+        return keywords[Math.floor(Math.random() * keywords.length)];
+      }
+      return chars[Math.floor(Math.random() * chars.length)];
+    }
+
+    function draw() {
+      var offW = W + PAD * 2;
+      var offH = H + PAD * 2;
+
+      /* Smooth interpolation towards target */
+      offsetX += (targetX - offsetX) * LERP;
+      offsetY += (targetY - offsetY) * LERP;
+
+      /* 1. Draw rain on offscreen canvas (oversized) */
+      offCtx.fillStyle = getTrailFade();
+      offCtx.fillRect(0, 0, offW, offH);
+      offCtx.font = fontSize + "px 'Courier New', Courier, monospace";
+
+      for (var i = 0; i < columns; i++) {
+        var text = pickChar();
+        var x = i * fontSize;
+        var y = drops[i] * fontSize;
+
+        var brightness = 80 + Math.floor(Math.random() * 176);
+        offCtx.fillStyle =
+          "rgb(0, " + brightness + ", " + Math.floor(brightness * 0.4) + ")";
+        offCtx.fillText(text, x, y);
+
+        if (y > offH && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i] += 0.5 + Math.random() * 0.5;
+      }
+
+      /* 2. Clear visible canvas */
+      ctx.clearRect(0, 0, W, H);
+
+      /* 3. Draw the "404" text as the clipping mask */
+      ctx.save();
+      ctx.font =
+        "900 " +
+        textFontSize +
+        "px -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillStyle = getBgColor();
+      ctx.fillText("404", W / 2, H / 2);
+
+      /* 4. Composite: keep only the rain pixels that overlap the text */
+      ctx.globalCompositeOperation = "source-in";
+      /* Sample region from the oversized offscreen, shifted by parallax */
+      var sx = (PAD - offsetX) * dpr;
+      var sy = (PAD - offsetY) * dpr;
+      ctx.drawImage(offscreen, sx, sy, W * dpr, H * dpr, 0, 0, W, H);
+      ctx.restore();
+      ctx.globalCompositeOperation = "source-over";
+
+      requestAnimationFrame(draw);
+    }
+
+    resize();
+    isDark = getThemeIsDark();
+    draw();
+    window.addEventListener("resize", resize);
+
+    // Listen for theme toggle
+    function onThemeChange() {
+      isDark = getThemeIsDark();
+      var offW = W + PAD * 2;
+      var offH = H + PAD * 2;
+      offCtx.fillStyle = getBgColor();
+      offCtx.fillRect(0, 0, offW, offH);
+    }
+    window.addEventListener("themechange", onThemeChange);
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", onThemeChange);
+
+    // Mouse parallax
+    document.addEventListener("mousemove", function (e) {
+      var cx = window.innerWidth / 2;
+      var cy = window.innerHeight / 2;
+      targetX = ((e.clientX - cx) / cx) * PAD;
+      targetY = ((e.clientY - cy) / cy) * PAD;
+    });
+  })();
+</script>
