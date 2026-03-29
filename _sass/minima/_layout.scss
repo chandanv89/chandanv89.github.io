@@ -33,12 +33,14 @@
   border: none;
   background-color: inherit;
 
-  label[for="nav-trigger"], #nav-trigger {
+  label[for="nav-trigger"],
+  #nav-trigger {
     display: none;
   }
 
   .nav-item {
     color: $text-color;
+
     &:not(:last-child) {
       margin-right: $spacing-unit * 0.5;
     }
@@ -74,32 +76,36 @@
         font-weight: 900;
       }
 
-      > svg path {
+      >svg path {
         fill: $border-color-03;
       }
     }
 
     #nav-trigger {
-      ~ label[for=nav-trigger] .menu-icon {
+      ~label[for=nav-trigger] .menu-icon {
         &::before {
           content: "\f0c9";
           font-size: 1.25em;
         }
       }
-      ~ .nav-items {
+
+      ~.nav-items {
         clear: both;
         display: none
       }
+
       &:checked {
-      ~ label[for=nav-trigger] .menu-icon {
-        &::before {
-          content: "\f00d";
-          font-size: 1.5em;
+        ~label[for=nav-trigger] .menu-icon {
+          &::before {
+            content: "\f00d";
+            font-size: 1.5em;
+          }
         }
-      }
-        ~ .nav-items {
+
+        ~.nav-items {
           display: block;
           padding-bottom: 5px;
+
           .nav-item {
             margin-left: 20px;
             padding: 5px 10px;
@@ -174,6 +180,10 @@
   .footer-col-3 {
     width: calc(45% - (#{$spacing-unit} / 2));
   }
+
+  .footer-col:last-child {
+    text-align: end;
+  }
 }
 
 @media screen and (min-width: $on-medium) {
@@ -219,7 +229,7 @@
   margin-left: 0;
   list-style: none;
 
-  > li {
+  >li {
     margin-bottom: $spacing-unit;
   }
 }
@@ -247,17 +257,26 @@
 }
 
 .post-meta {
-  .bullet-divider { padding-inline: 15px }
-  .meta-label { font-weight: 600 }
+  .bullet-divider {
+    padding-inline: 15px
+  }
+
+  .meta-label {
+    font-weight: 600
+  }
 
   .force-inline {
     display: inline;
+
     &::before {
       content: "•";
       padding-inline: 5px;
     }
   }
-  .post-authors { margin-top: 3px }
+
+  .post-authors {
+    margin-top: 3px
+  }
 }
 
 .post-title,
@@ -276,7 +295,14 @@
 .post-content {
   margin-bottom: $spacing-unit;
 
-  h1, h2, h3, h4, h5, h6 { margin-top: $spacing-unit }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: $spacing-unit
+  }
 
   h2 {
     @include relative-font-size(1.75);
@@ -301,6 +327,7 @@
   h5 {
     @include relative-font-size(1.125);
   }
+
   h6 {
     @include relative-font-size(1.0625);
   }
@@ -314,18 +341,26 @@
 .social-media-list {
   display: table;
   margin: 0 auto;
+
   li {
     float: left;
     min-width: 45px;
     min-height: 45px;
     text-align: center;
     margin: 5px 10px 5px 0;
-    &:last-of-type { margin-right: 0 }
+
+    &:last-of-type {
+      margin-right: 0
+    }
+
     a {
       display: block;
       padding: 10px 12px;
       border: 1px solid $border-color-01;
-      &:hover { border-color: $border-color-02 }
+
+      &:hover {
+        border-color: $border-color-02
+      }
     }
   }
 }
@@ -339,30 +374,40 @@
   display: table;
   margin: 0 auto;
   list-style-type: none;
+
   li {
     float: left;
     margin: 0 3px;
     min-width: 45px;
     min-height: 45px;
     text-align: center;
+
     a {
       display: block;
       text-decoration: none;
       border: 1px solid $border-color-01;
-      &:hover { border-color: $border-color-02 }
+
+      &:hover {
+        border-color: $border-color-02
+      }
     }
-    a, div {
+
+    a,
+    div {
       min-width: 41px;
       padding: 10px 12px;
       text-align: center;
       box-sizing: border-box;
     }
+
     div {
       border: 1px solid transparent;
+
       &.pager-edge {
         color: $border-color-01;
         border: 1px dashed;
       }
+
       &.current-page {
         font-weight: bold;
       }
@@ -383,6 +428,7 @@
 
 .task-list-item {
   list-style-type: none;
+
   &-checkbox {
     position: relative;
     margin-right: $spacing-unit * 0.3;
@@ -391,6 +437,7 @@
     border: 8px solid $border-color-01;
     vertical-align: text-top;
     z-index: -1;
+
     &::after {
       position: absolute;
       top: -8px;
@@ -402,7 +449,10 @@
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);
     }
-    &:checked::after { border-color: $border-color-03 }
+
+    &:checked::after {
+      border-color: $border-color-03
+    }
   }
 }
 
