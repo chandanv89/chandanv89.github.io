@@ -9,7 +9,7 @@ description: "How to integrate GitHub with Docker Hub to set up automated Docker
 
 ![Integrate Github with Docker Hub to setup Automated Builds](/assets/images/post-2-header-image.png)
 
-In the [previous article](/2021/01/17/dockerize-your-spring-boot-application.html) successfully dockerized our demo Spring Boot application. Now, let's take a look at how we can leverage the Github and Docker Hub infrastructure to setup auto builds to trigger the creation of Docker images for our application whenever we push some changes to the code repository.
+In the [previous article](/devops/docker/engineering/2021/01/17/dockerize-your-spring-boot-application.html) successfully dockerized our demo Spring Boot application. Now, let's take a look at how we can leverage the Github and Docker Hub infrastructure to setup auto builds to trigger the creation of Docker images for our application whenever we push some changes to the code repository.
 
 Docker Hub can be integrated with most of the code versioning and hosting providers. For this tutorial, however, we'll consider GitHub. So, it is fair to assume that you already have a GitHub account and that you have an example repository created. If not, you can create a free GitHub account [here](https://github.com/) and push the sample project you might have on to your new repository or you can use the one I'm using through out this tutorial [here](https://github.com/chandanv89/Hateoas-Example).
 

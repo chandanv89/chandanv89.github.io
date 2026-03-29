@@ -124,6 +124,10 @@ html[data-theme="light"] .theme-toggle {
   vertical-align: middle;
 }
 
+.site-title:hover {
+  text-decoration: none;
+}
+
 // Font assignments
 h1,
 h2,
@@ -139,7 +143,8 @@ h6,
 .toc-summary,
 .toc-list,
 .site-footer,
-.footer-credit {
+.footer-credit,
+.work-details {
   font-family: $base-sans-serif-font-family;
 }
 
