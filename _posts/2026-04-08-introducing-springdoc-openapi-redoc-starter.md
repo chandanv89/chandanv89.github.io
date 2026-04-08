@@ -32,6 +32,8 @@ Start your app. Visit `/redoc`. That's it!
 
 The starter auto-configures everything following the same patterns Spring Boot developers already know — `@ConditionalOnProperty`, `@ConditionalOnMissingBean`, and configuration properties bound via `application.yml`.
 
+![Redoc in action](/assets/images/post-5-redoc-books-api.png)
+
 ## Why Build This?
 
 The `springdoc-openapi` project provides excellent Swagger UI integration via `springdoc-openapi-starter-webmvc-ui`. I wanted the same experience for Redoc: add a dependency, get a working UI. Surprisingly, nothing like this existed as a proper Spring Boot starter.
