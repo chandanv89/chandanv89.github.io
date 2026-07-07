@@ -2,16 +2,11 @@
 
 // Define defaults for each variable.
 
-$base-font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Segoe UI Emoji",
-  "Segoe UI Symbol", "Apple Color Emoji", Roboto, Helvetica, Arial, sans-serif !default;
-$base-sans-serif-font-family: "Inter",
-  -apple-system,
-  system-ui,
-  sans-serif !default;
-$base-serif-font-family: "Lora", "Georgia", serif !default;
-$code-font-family: "Menlo", "Inconsolata", "Consolas", "Roboto Mono", "Ubuntu Mono",
-  "Liberation Mono", "Courier New", monospace;
-$base-font-size: 16px !default;
+$base-font-family: Inter, -apple-system, system-ui, sans-serif !default;
+$base-sans-serif-font-family: "Inter", -apple-system, system-ui, sans-serif !default;
+$base-serif-font-family: "Literata", "Lora", "Georgia", serif !default;
+$code-font-family: Hack, "Victor Mono", monospace !default;
+$base-font-size: 22px !default;
 $base-font-weight: 400 !default;
 $small-font-size: $base-font-size * 0.875 !default;
 $base-line-height: 1.5 !default;
