@@ -389,11 +389,14 @@ div.highlighter-rouge {
   pointer-events: none;
   font-family: $code-font-family;
   line-height: 1.4;
+  background-color: var(--minima-code-background-color-glass);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
 
   span {
     display: block;
     padding-right: 0.6em;
-    color: var(--minima-brand-color-light, #999);
+    color: var(--minima-border-color-02);
   }
 }
 
