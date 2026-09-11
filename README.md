@@ -38,14 +38,17 @@ Personal blog and portfolio site for **Chandan Veerabhadrappa** — built with [
 
 ```bash
 # Clone the repo
-git clone https://github.com/chandanv89/chandanv89.github.io.git
-cd chandanv89.github.io
+$ git clone https://github.com/chandanv89/chandanv89.github.io.git
+$ cd chandanv89.github.io
+
+# Tell bundler to install depndencies locally
+$ bundle config set --local path 'vendor/bundle'
 
 # Install dependencies
-bundle install
+$ bundle install
 
 # Serve locally with live reload
-bundle exec jekyll serve --livereload
+$ bundle exec jekyll serve --livereload
 ```
 
 The site will be available at **http://localhost:4000**.
